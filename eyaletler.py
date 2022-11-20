@@ -61,4 +61,5 @@ def eyalet():
     WV
     WY
     '''
+
     return a.split()

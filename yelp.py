@@ -5,17 +5,13 @@ import time
 import json
 import pandas    as pd
 import csv
-#Transaction Search   URL -- 'https://api.yelp.com/v3/transactions/{transaction_type}/search'
-#Autocomplete         URL -- 'https://api.yelp.com/v3/autocomplete'
-
-#Categories           URL -- 'https://api.yelp.com/v3/categories'
-#Categories Alias     URL -- 'https://api.yelp.com/v3/categories/{alias}'
+from openpyxl import Workbook
 def CompanyAndPhone(xx):
-     text=''
-     for x in xx:
-         text=x['name']+';'+x['phone']
-         yazdir(text)
 
+     for x in xx:
+         ws.append([x['name'], x['phone']])
+
+     wb.save("demoexcel.xlsx")
 
 
 
@@ -70,24 +66,11 @@ MY_API_KEY = 'ZOZfxsbgPRb8UGMmlrElq_sVx1G-SdsH0mu6zuGvrlGmo2t5fRuzEdHgcCwJA5ySNs
 BUSINESS_PATH = 'https://api.yelp.com/v3/transactions/delivery/search'
 HEADERS = {'Authorization': 'bearer %s' % MY_API_KEY}
 
-# Define the Parameters of the search
+wb = Workbook ()
+ws = wb. active
 
 dosya_yolu = r"C:\Users\Ali\Desktop\OnMuhasebe\test.txt"
 sil(dosya_yolu)
 convert_excell()
-# Make a Request to the API, and return results
 
 
-# print the data
-#print(json.dumps(business_data, indent = 3))
-
-# Define Phone Parameter - Phone Search - MUST START WITH "+" and the COUNTRY CODE
-#PARAMETERS = {'phone': '+18584340001'}
-
-# Define Parameters - Transaction Type
-#PARAMETERS = {'location':'San Diego'}
-
-# Define Paramters -  Autocomplete
-#PARAMETERS = {'text': 'good food',
-#              'latitude': 32.715736,
-#              'longitude': -117.161087}

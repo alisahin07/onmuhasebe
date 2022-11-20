@@ -3,7 +3,9 @@
 
 #Categories           URL -- 'https://api.yelp.com/v3/categories'
 #Categories Alias     URL -- 'https://api.yelp.com/v3/categories/{alias}'
-
+from openpyxl import Workbook
+wb = Workbook ()
+ws = wb. active
 # Import the modules
 import requests
 import json
@@ -17,7 +19,7 @@ BUSINESS_PATH = 'https://api.yelp.com/v3/transactions/delivery/search'
 HEADERS = {'Authorization': 'bearer %s' % MY_API_KEY}
 
 # Define the Parameters of the search
-PARAMETERS = {'location':'98352'}
+PARAMETERS = {'location':'NYC'}
 
 # Make a Request to the API, and return results
 response = requests.get(url=BUSINESS_PATH,
@@ -27,8 +29,13 @@ response = requests.get(url=BUSINESS_PATH,
 # Convert response to a JSON String
 business_data = response.json()
 print(business_data['businesses'])
+deneme=[]
 for x in business_data['businesses']:
     print(x['name']+'--->telefon= '+x['phone'])
+    ws.append([x['name'],x['phone']])
+
+
+wb.save ("demoexcel.xlsx")
 # print the data
 #print(json.dumps(business_data, indent = 3))
 
